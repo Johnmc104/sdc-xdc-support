@@ -3,7 +3,7 @@
   "displayName": "SDC/XDC Constraints Support",
   "description": "Synopsys Design Constraints (SDC) and Xilinx Design Constraints (XDC) language support for VS Code",
   "version": "1.0.0",
-  "publisher": "your-publisher-id",
+  "publisher": "zhhe",
   "license": "MIT",
   "engines": {
     "vscode": "^1.75.0"
