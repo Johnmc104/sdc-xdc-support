@@ -46,6 +46,11 @@
 		"commands": {
 			"patterns": [
 				{ "include": "#tcl-commands" },
+				{ "include": "#sdc-object-commands" },
+				{ "include": "#sdc-constraint-commands" },
+				{ "include": "#sdc-environment-commands" },
+				{ "include": "#sdc-power-commands" },
+				{ "include": "#xdc-commands" },
 				{ "include": "#special-commands" },
 				{ "include": "#expression-commands" },
 				{ "include": "#other-commands" },
@@ -154,6 +159,86 @@
 					"begin": "(?>\\:\\:++)?+(?>http|msgcat|platform(?>\\:\\:++shell)?+|safe|tcltest|tcl\\:\\:++tm)(?>\\:\\:++[a-zA-Z]\\w*+)(?=[;\\]\\}\\s]|\\\\\n|$)",
 					"beginCaptures": {
 						"0": { "name": "keyword.other.sdc" }
+					},
+					"end": "(?=[;\\]\\}\n])",
+					"patterns": [
+						{ "include": "#normal-arguments" }
+					]
+				}
+			]
+		},
+		"sdc-object-commands": {
+			"patterns": [
+				{
+					"begin": "(?>all_clocks|all_inputs|all_outputs|all_registers|current_design|current_instance|get_cells|get_clocks|get_lib_cells|get_lib_pins|get_libs|get_nets|get_pins|get_ports|set_hierarchy_separator)(?=[;\\]\\}\\s]|\\\\\n|$)",
+					"beginCaptures": {
+						"0": { "name": "support.function.sdc.object" }
+					},
+					"end": "(?=[;\\]\\}\n])",
+					"patterns": [
+						{ "include": "#normal-arguments" }
+					]
+				}
+			]
+		},
+		"sdc-constraint-commands": {
+			"patterns": [
+				{
+					"begin": "(?>create_clock|create_generated_clock|group_path|set_clock_gating_check|set_clock_groups|set_clock_latency|set_clock_transition|set_clock_uncertainty|set_data_check|set_disable_timing|set_false_path|set_ideal_latency|set_ideal_network|set_ideal_transition|set_input_delay|set_output_delay|set_max_delay|set_min_delay|set_max_time_borrow|set_min_pulse_width|set_multicycle_path|set_propagated_clock|set_resistance|set_sense|set_timing_derate)(?=[;\\]\\}\\s]|\\\\\n|$)",
+					"beginCaptures": {
+						"0": { "name": "keyword.other.sdc.timing" }
+					},
+					"end": "(?=[;\\]\\}\n])",
+					"patterns": [
+						{ "include": "#normal-arguments" }
+					]
+				}
+			]
+		},
+		"sdc-environment-commands": {
+			"patterns": [
+				{
+					"begin": "(?>set_case_analysis|set_drive|set_driving_cell|set_fanout_load|set_input_transition|set_load|set_logic_dc|set_logic_one|set_logic_zero|set_max_area|set_max_capacitance|set_min_capacitance|set_max_fanout|set_max_transition|set_operating_conditions|set_port_fanout_number|set_units|set_wire_load_min_block_size|set_wire_load_mode|set_wire_load_model|set_wire_load_selection_group)(?=[;\\]\\}\\s]|\\\\\n|$)",
+					"beginCaptures": {
+						"0": { "name": "keyword.other.sdc.environment" }
+					},
+					"end": "(?=[;\\]\\}\n])",
+					"patterns": [
+						{ "include": "#normal-arguments" }
+					]
+				}
+			]
+		},
+		"sdc-power-commands": {
+			"patterns": [
+				{
+					"begin": "(?>create_voltage_area|set_level_shifter_strategy|set_level_shifter_threshold|set_max_dynamic_power|set_max_leakage_power)(?=[;\\]\\}\\s]|\\\\\n|$)",
+					"beginCaptures": {
+						"0": { "name": "keyword.other.sdc.power" }
+					},
+					"end": "(?=[;\\]\\}\n])",
+					"patterns": [
+						{ "include": "#normal-arguments" }
+					]
+				}
+			]
+		},
+		"xdc-commands": {
+			"patterns": [
+				{
+					"begin": "(?>set_property|get_property|create_pblock|add_cells_to_pblock|remove_cells_from_pblock|resize_pblock|delete_pblock|create_macro|update_macro|delete_macro|set_package_pin_val|get_package_pins|set_switching_activity|reset_switching_activity|set_power_opt|create_waiver|set_param|get_param|set_msg_config|create_debug_core|create_debug_port|set_input_jitter|set_output_jitter|set_system_jitter|set_external_delay|create_interface|set_bus_skew)(?=[;\\]\\}\\s]|\\\\\n|$)",
+					"beginCaptures": {
+						"0": { "name": "keyword.other.xdc" }
+					},
+					"end": "(?=[;\\]\\}\n])",
+					"patterns": [
+						{ "include": "#normal-arguments" }
+					]
+				},
+				{
+					"begin": "(?>get_bel_pins|get_bels|get_board_buses|get_board_components|get_board_interfaces|get_board_parts|get_cfgmem_parts|get_debug_cores|get_debug_ports|get_designs|get_generated_clocks|get_hierarchy_separator|get_iobanks|get_iobs|get_interfaces|get_macros|get_nodes|get_package_pins|get_pads|get_parts|get_path_groups|get_pblocks|get_pips|get_pkgpin_bytegroups|get_pkgpin_nibbles|get_projects|get_runs|get_sites|get_site_pins|get_site_pips|get_slrs|get_speed_models|get_tiles|get_timing_arcs|get_wires)(?=[;\\]\\}\\s]|\\\\\n|$)",
+					"beginCaptures": {
+						"0": { "name": "support.function.xdc.object" }
 					},
 					"end": "(?=[;\\]\\}\n])",
 					"patterns": [

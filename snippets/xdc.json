@@ -1,0 +1,111 @@
+{
+  "Set Property": {
+    "prefix": "set_property",
+    "body": [
+      "set_property ${1|PACKAGE_PIN,IOSTANDARD,SLEW,DRIVE,PULLUP,PULLDOWN,DIFF_TERM,LOC|} ${2:value} [get_ports ${3:port_name}]"
+    ],
+    "description": "Set a property on a design object"
+  },
+  "Set Property PACKAGE_PIN": {
+    "prefix": "set_property_pin",
+    "body": [
+      "set_property PACKAGE_PIN ${1:pin} [get_ports ${2:port_name}]"
+    ],
+    "description": "Set package pin assignment"
+  },
+  "Set Property IOSTANDARD": {
+    "prefix": "set_property_iostd",
+    "body": [
+      "set_property IOSTANDARD ${1|LVCMOS33,LVCMOS25,LVCMOS18,LVCMOS15,LVCMOS12,LVDS,LVDS_25,SSTL18_I,SSTL15,SSTL135,HSTL_I,DIFF_SSTL18_I,DIFF_SSTL15,DIFF_SSTL135|} [get_ports ${2:port_name}]"
+    ],
+    "description": "Set IO standard"
+  },
+  "Set Property Pin + IOSTANDARD": {
+    "prefix": "xdc_pin",
+    "body": [
+      "set_property PACKAGE_PIN ${1:pin} [get_ports ${2:port_name}]",
+      "set_property IOSTANDARD ${3|LVCMOS33,LVCMOS25,LVCMOS18,LVCMOS15,LVCMOS12,LVDS,LVDS_25|} [get_ports ${2:port_name}]"
+    ],
+    "description": "Pin assignment with IO standard"
+  },
+  "Create Pblock": {
+    "prefix": "create_pblock",
+    "body": [
+      "create_pblock ${1:pblock_name}",
+      "add_cells_to_pblock [get_pblocks ${1:pblock_name}] [get_cells -quiet [list ${2:cell_path}]]",
+      "resize_pblock [get_pblocks ${1:pblock_name}] -add {${3:SLICE_X0Y0:SLICE_X10Y10}}"
+    ],
+    "description": "Create and configure a Pblock"
+  },
+  "Set Bus Skew": {
+    "prefix": "set_bus_skew",
+    "body": [
+      "set_bus_skew -from [get_cells ${1:src}] -to [get_cells ${2:dst}] ${3:0.5}"
+    ],
+    "description": "Set bus skew constraint"
+  },
+  "Set Input Jitter": {
+    "prefix": "set_input_jitter",
+    "body": [
+      "set_input_jitter [get_clocks ${1:clk}] ${2:0.1}"
+    ],
+    "description": "Set input jitter on clock"
+  },
+  "Set Switching Activity": {
+    "prefix": "set_switching_activity",
+    "body": [
+      "set_switching_activity -toggle_rate ${1:12.5} -static_probability ${2:0.5} [get_ports ${3:port_name}]"
+    ],
+    "description": "Set switching activity for power analysis"
+  },
+  "Set Msg Config": {
+    "prefix": "set_msg_config",
+    "body": [
+      "set_msg_config -id {${1:msg_id}} -${2|suppress,new_severity WARNING,new_severity ERROR,new_severity INFO|}"
+    ],
+    "description": "Configure message severity"
+  },
+  "Get Property": {
+    "prefix": "get_property",
+    "body": [
+      "[get_property ${1:property_name} [get_${2|ports,cells,pins,nets,clocks|} ${3:name}]]"
+    ],
+    "description": "Get a property value"
+  },
+  "XDC Header": {
+    "prefix": "xdc_header",
+    "body": [
+      "################################################################################",
+      "# ${1:Project Name} - XDC Constraints File",
+      "# Target Device: ${2:xc7a35t}",
+      "# Author: ${3:author}",
+      "# Date:   ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
+      "################################################################################",
+      "",
+      "# Clock Constraints",
+      "$0"
+    ],
+    "description": "XDC file header template"
+  },
+  "Create Debug Core": {
+    "prefix": "create_debug_core",
+    "body": [
+      "create_debug_core ${1:u_ila_0} ila",
+      "set_property C_DATA_DEPTH ${2|1024,2048,4096,8192,16384|} [get_debug_cores ${1:u_ila_0}]",
+      "set_property C_TRIGIN_EN false [get_debug_cores ${1:u_ila_0}]",
+      "set_property C_TRIGOUT_EN false [get_debug_cores ${1:u_ila_0}]",
+      "set_property C_INPUT_PIPE_STAGES ${3:0} [get_debug_cores ${1:u_ila_0}]"
+    ],
+    "description": "Create ILA debug core"
+  },
+  "BITSTREAM Properties": {
+    "prefix": "bitstream_config",
+    "body": [
+      "set_property BITSTREAM.CONFIG.SPI_BUSWIDTH ${1|1,2,4,8|} [current_design]",
+      "set_property BITSTREAM.CONFIG.CONFIGRATE ${2|33,50,66|} [current_design]",
+      "set_property CONFIG_VOLTAGE ${3|3.3,2.5,1.8|} [current_design]",
+      "set_property CFGBVS ${4|VCCO,GND|} [current_design]"
+    ],
+    "description": "Bitstream configuration properties"
+  }
+}

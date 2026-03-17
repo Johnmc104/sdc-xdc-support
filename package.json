@@ -53,6 +53,20 @@
         "path": "./syntaxes/sdc.tmLanguage.json"
       }
     ],
+    "snippets": [
+      {
+        "language": "sdc",
+        "path": "./snippets/sdc.json"
+      },
+      {
+        "language": "xdc",
+        "path": "./snippets/sdc.json"
+      },
+      {
+        "language": "xdc",
+        "path": "./snippets/xdc.json"
+      }
+    ],
     "configuration": [
       {
         "title": "SDC/XDC: Language Server",

@@ -1,0 +1,317 @@
+{
+  "Create Clock": {
+    "prefix": "create_clock",
+    "body": [
+      "create_clock -period ${1:10} -name ${2:clk_name} -waveform {0 ${3:5}} [get_ports ${4:clk}]"
+    ],
+    "description": "Create a clock constraint"
+  },
+  "Create Generated Clock": {
+    "prefix": "create_generated_clock",
+    "body": [
+      "create_generated_clock -name ${1:gen_clk} -source [get_ports ${2:clk}] -divide_by ${3:2} [get_pins ${4:pin}]"
+    ],
+    "description": "Create a generated clock"
+  },
+  "Set Input Delay": {
+    "prefix": "set_input_delay",
+    "body": [
+      "set_input_delay -clock [get_clocks ${1:clk}] -max ${2:2.0} [get_ports ${3:port_name}]"
+    ],
+    "description": "Set input delay constraint"
+  },
+  "Set Input Delay Min/Max": {
+    "prefix": "set_input_delay_minmax",
+    "body": [
+      "set_input_delay -clock [get_clocks ${1:clk}] -max ${2:2.0} [get_ports ${3:port_name}]",
+      "set_input_delay -clock [get_clocks ${1:clk}] -min ${4:1.0} [get_ports ${3:port_name}]"
+    ],
+    "description": "Set input delay with min and max"
+  },
+  "Set Output Delay": {
+    "prefix": "set_output_delay",
+    "body": [
+      "set_output_delay -clock [get_clocks ${1:clk}] -max ${2:2.0} [get_ports ${3:port_name}]"
+    ],
+    "description": "Set output delay constraint"
+  },
+  "Set Output Delay Min/Max": {
+    "prefix": "set_output_delay_minmax",
+    "body": [
+      "set_output_delay -clock [get_clocks ${1:clk}] -max ${2:2.0} [get_ports ${3:port_name}]",
+      "set_output_delay -clock [get_clocks ${1:clk}] -min ${4:1.0} [get_ports ${3:port_name}]"
+    ],
+    "description": "Set output delay with min and max"
+  },
+  "Set False Path": {
+    "prefix": "set_false_path",
+    "body": [
+      "set_false_path -from [get_clocks ${1:src_clk}] -to [get_clocks ${2:dst_clk}]"
+    ],
+    "description": "Set a false path between clocks"
+  },
+  "Set False Path Ports": {
+    "prefix": "set_false_path_port",
+    "body": [
+      "set_false_path -from [get_ports ${1:port}]"
+    ],
+    "description": "Set a false path from a port"
+  },
+  "Set Multicycle Path": {
+    "prefix": "set_multicycle_path",
+    "body": [
+      "set_multicycle_path ${1:2} -setup -from [get_clocks ${2:src_clk}] -to [get_clocks ${3:dst_clk}]",
+      "set_multicycle_path ${4:1} -hold  -from [get_clocks ${2:src_clk}] -to [get_clocks ${3:dst_clk}]"
+    ],
+    "description": "Set multicycle path with setup and hold"
+  },
+  "Set Max Delay": {
+    "prefix": "set_max_delay",
+    "body": [
+      "set_max_delay ${1:10.0} -from [get_${2|clocks,ports,pins,cells|} ${3:src}] -to [get_${4|clocks,ports,pins,cells|} ${5:dst}]"
+    ],
+    "description": "Set maximum delay constraint"
+  },
+  "Set Min Delay": {
+    "prefix": "set_min_delay",
+    "body": [
+      "set_min_delay ${1:5.0} -from [get_${2|clocks,ports,pins,cells|} ${3:src}] -to [get_${4|clocks,ports,pins,cells|} ${5:dst}]"
+    ],
+    "description": "Set minimum delay constraint"
+  },
+  "Set Clock Groups": {
+    "prefix": "set_clock_groups",
+    "body": [
+      "set_clock_groups -${1|asynchronous,logically_exclusive,physically_exclusive|} -group [get_clocks ${2:clk1}] -group [get_clocks ${3:clk2}]"
+    ],
+    "description": "Set clock groups relationship"
+  },
+  "Set Clock Uncertainty": {
+    "prefix": "set_clock_uncertainty",
+    "body": [
+      "set_clock_uncertainty -${1|setup,hold|} ${2:0.1} [get_clocks ${3:clk}]"
+    ],
+    "description": "Set clock uncertainty"
+  },
+  "Set Clock Latency": {
+    "prefix": "set_clock_latency",
+    "body": [
+      "set_clock_latency -${1|source,network|} ${2:1.0} [get_clocks ${3:clk}]"
+    ],
+    "description": "Set clock latency"
+  },
+  "Set Clock Transition": {
+    "prefix": "set_clock_transition",
+    "body": [
+      "set_clock_transition ${1:0.1} [get_clocks ${2:clk}]"
+    ],
+    "description": "Set clock transition time"
+  },
+  "Set Disable Timing": {
+    "prefix": "set_disable_timing",
+    "body": [
+      "set_disable_timing -from ${1:pin_from} -to ${2:pin_to} [get_cells ${3:cell}]"
+    ],
+    "description": "Disable timing arc"
+  },
+  "Set Case Analysis": {
+    "prefix": "set_case_analysis",
+    "body": [
+      "set_case_analysis ${1|0,1,rising,falling|} [get_${2|ports,pins|} ${3:name}]"
+    ],
+    "description": "Set case analysis value"
+  },
+  "Set Load": {
+    "prefix": "set_load",
+    "body": [
+      "set_load ${1:0.5} [get_ports ${2:port_name}]"
+    ],
+    "description": "Set load on a port"
+  },
+  "Set Driving Cell": {
+    "prefix": "set_driving_cell",
+    "body": [
+      "set_driving_cell -lib_cell ${1:cell_name} -pin ${2:pin_name} [get_ports ${3:port_name}]"
+    ],
+    "description": "Set driving cell for input port"
+  },
+  "Set Input Transition": {
+    "prefix": "set_input_transition",
+    "body": [
+      "set_input_transition ${1:0.5} [get_ports ${2:port_name}]"
+    ],
+    "description": "Set input transition time"
+  },
+  "Set Operating Conditions": {
+    "prefix": "set_operating_conditions",
+    "body": [
+      "set_operating_conditions ${1:condition_name}"
+    ],
+    "description": "Set operating conditions"
+  },
+  "Set Max Area": {
+    "prefix": "set_max_area",
+    "body": [
+      "set_max_area ${1:0}"
+    ],
+    "description": "Set maximum area constraint"
+  },
+  "Set Max Transition": {
+    "prefix": "set_max_transition",
+    "body": [
+      "set_max_transition ${1:0.5} [current_design]"
+    ],
+    "description": "Set maximum transition time"
+  },
+  "Set Max Capacitance": {
+    "prefix": "set_max_capacitance",
+    "body": [
+      "set_max_capacitance ${1:0.5} [get_ports ${2:port_name}]"
+    ],
+    "description": "Set maximum capacitance"
+  },
+  "Set Max Fanout": {
+    "prefix": "set_max_fanout",
+    "body": [
+      "set_max_fanout ${1:10} [current_design]"
+    ],
+    "description": "Set maximum fanout"
+  },
+  "Set Units": {
+    "prefix": "set_units",
+    "body": [
+      "set_units -time ${1|ns,ps,us,ms|} -capacitance ${2|pF,fF|} -resistance ${3|kOhm,Ohm|}"
+    ],
+    "description": "Set units for the SDC file"
+  },
+  "Group Path": {
+    "prefix": "group_path",
+    "body": [
+      "group_path -name ${1:group_name} -from [get_${2|clocks,ports,pins,cells|} ${3:src}] -to [get_${4|clocks,ports,pins,cells|} ${5:dst}] -weight ${6:1}"
+    ],
+    "description": "Group timing paths"
+  },
+  "Set Ideal Network": {
+    "prefix": "set_ideal_network",
+    "body": [
+      "set_ideal_network [get_ports ${1:port_name}]"
+    ],
+    "description": "Set ideal network"
+  },
+  "Set Propagated Clock": {
+    "prefix": "set_propagated_clock",
+    "body": [
+      "set_propagated_clock [get_clocks ${1:clk}]"
+    ],
+    "description": "Set propagated clock"
+  },
+  "Set Timing Derate": {
+    "prefix": "set_timing_derate",
+    "body": [
+      "set_timing_derate -${1|early,late|} ${2:0.95}"
+    ],
+    "description": "Set timing derate factor"
+  },
+  "Set Min Pulse Width": {
+    "prefix": "set_min_pulse_width",
+    "body": [
+      "set_min_pulse_width -${1|low,high|} ${2:1.0} [get_clocks ${3:clk}]"
+    ],
+    "description": "Set minimum pulse width"
+  },
+  "Get Ports": {
+    "prefix": "get_ports",
+    "body": [
+      "[get_ports ${1:pattern}]"
+    ],
+    "description": "Get ports by name pattern"
+  },
+  "Get Cells": {
+    "prefix": "get_cells",
+    "body": [
+      "[get_cells -hierarchical ${1:pattern}]"
+    ],
+    "description": "Get cells by name pattern"
+  },
+  "Get Clocks": {
+    "prefix": "get_clocks",
+    "body": [
+      "[get_clocks ${1:pattern}]"
+    ],
+    "description": "Get clocks by name pattern"
+  },
+  "Get Pins": {
+    "prefix": "get_pins",
+    "body": [
+      "[get_pins ${1:pattern}]"
+    ],
+    "description": "Get pins by name pattern"
+  },
+  "Get Nets": {
+    "prefix": "get_nets",
+    "body": [
+      "[get_nets -hierarchical ${1:pattern}]"
+    ],
+    "description": "Get nets by name pattern"
+  },
+  "All Clocks": {
+    "prefix": "all_clocks",
+    "body": [
+      "[all_clocks]"
+    ],
+    "description": "Get all clocks"
+  },
+  "All Inputs": {
+    "prefix": "all_inputs",
+    "body": [
+      "[all_inputs]"
+    ],
+    "description": "Get all input ports"
+  },
+  "All Outputs": {
+    "prefix": "all_outputs",
+    "body": [
+      "[all_outputs]"
+    ],
+    "description": "Get all output ports"
+  },
+  "SDC Header": {
+    "prefix": "sdc_header",
+    "body": [
+      "################################################################################",
+      "# ${1:Project Name} - SDC Constraints File",
+      "# Author: ${2:author}",
+      "# Date:   ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
+      "################################################################################",
+      "",
+      "set sdc_version 2.1",
+      "",
+      "# Units",
+      "set_units -time ns -capacitance pF",
+      "",
+      "$0"
+    ],
+    "description": "SDC file header template"
+  },
+  "Clock Domain Crossing": {
+    "prefix": "cdc",
+    "body": [
+      "# Clock Domain Crossing: ${1:clk1} -> ${2:clk2}",
+      "set_clock_groups -asynchronous \\\\",
+      "  -group [get_clocks ${1:clk1}] \\\\",
+      "  -group [get_clocks ${2:clk2}]"
+    ],
+    "description": "Clock domain crossing constraint"
+  },
+  "IO Constraints Template": {
+    "prefix": "io_constraints",
+    "body": [
+      "# IO Constraints for ${1:interface_name}",
+      "set_input_delay  -clock [get_clocks ${2:clk}] -max ${3:2.0} [get_ports ${4:{data_in[*]}}]",
+      "set_input_delay  -clock [get_clocks ${2:clk}] -min ${5:0.5} [get_ports ${4:{data_in[*]}}]",
+      "set_output_delay -clock [get_clocks ${2:clk}] -max ${6:2.0} [get_ports ${7:{data_out[*]}}]",
+      "set_output_delay -clock [get_clocks ${2:clk}] -min ${8:0.5} [get_ports ${7:{data_out[*]}}]"
+    ],
+    "description": "IO delay constraints template"
+  }
+}
