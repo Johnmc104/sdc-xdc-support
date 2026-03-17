@@ -32,6 +32,10 @@
 
 ## 安装方式
 
+```
+vsce package --allow-missing-repository
+```
+
 本插件支持离线安装，无需网络连接。
 
 1. 在 VS Code 中按 `Ctrl+Shift+P`，输入 `Extensions: Install from VSIX...`
