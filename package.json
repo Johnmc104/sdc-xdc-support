@@ -1,0 +1,104 @@
+{
+  "name": "sdc-xdc-support",
+  "displayName": "SDC/XDC Constraints Support",
+  "description": "Synopsys Design Constraints (SDC) and Xilinx Design Constraints (XDC) language support for VS Code",
+  "version": "1.0.0",
+  "publisher": "your-publisher-id",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "activationEvents": [
+    "onLanguage:sdc",
+    "onLanguage:xdc"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "sdc",
+        "aliases": [
+          "Synopsys Design Constraints",
+          "SDC"
+        ],
+        "extensions": [
+          ".sdc"
+        ],
+        "configuration": "./configs/sdc.configuration.json"
+      },
+      {
+        "id": "xdc",
+        "aliases": [
+          "Xilinx Design Constraints",
+          "XDC"
+        ],
+        "extensions": [
+          ".xdc"
+        ],
+        "configuration": "./configs/sdc.configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "sdc",
+        "scopeName": "source.sdc",
+        "path": "./syntaxes/sdc.tmLanguage.json"
+      },
+      {
+        "language": "xdc",
+        "scopeName": "source.sdc",
+        "path": "./syntaxes/sdc.tmLanguage.json"
+      }
+    ],
+    "configuration": [
+      {
+        "title": "SDC/XDC: Language Server",
+        "properties": {
+          "sdcXdc.languageServer.tclsp.enabled": {
+            "scope": "window",
+            "type": "boolean",
+            "default": false,
+            "markdownDescription": "Enable tclsp Language Server for SDC/XDC."
+          },
+          "sdcXdc.languageServer.tclsp.path": {
+            "scope": "window",
+            "type": "string",
+            "default": "tclsp",
+            "markdownDescription": "A path to the tclsp Language Server binary."
+          },
+          "sdcXdc.languageServer.tclsp.arguments": {
+            "scope": "window",
+            "type": "string",
+            "default": "",
+            "markdownDescription": "Add custom arguments for the tclsp Language Server."
+          },
+          "sdcXdc.languageServer.tclsp.configPath": {
+            "scope": "window",
+            "type": "string",
+            "default": "",
+            "markdownDescription": "Optional path to a tclint config file. Absolute paths are recommended; relative paths are resolved per workspace root."
+          }
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "package": "npm run check-types && node esbuild.js --production",
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.75.0",
+    "esbuild": "^0.27.2",
+    "typescript": "^5.5.0"
+  }
+}
