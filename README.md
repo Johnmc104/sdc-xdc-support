@@ -1,6 +1,6 @@
-# SDC/XDC/TCL/UCF Constraints Support
+# SDC/XDC Constraints Support
 
-Provides syntax highlighting and language server support for FPGA/ASIC design constraint files in VS Code.
+Provides syntax highlighting, code snippets, and language server support for FPGA/ASIC design constraint files in VS Code.
 
 ## Supported Languages
 
@@ -8,14 +8,27 @@ Provides syntax highlighting and language server support for FPGA/ASIC design co
 |----------|----------------|-------------|
 | SDC | `.sdc` | Synopsys Design Constraints |
 | XDC | `.xdc` | Xilinx Design Constraints |
-| TCL | `.tcl`, `.tm`, `.tk` | Tool Command Language |
-| UPF | `.upf` | Unified Power Format |
-| UCF | `.ucf` | User Constraints File (Xilinx legacy) |
 
 ## Features
 
-- **Syntax Highlighting**: Full TextMate grammar support for SDC, XDC, TCL, UPF, and UCF files.
-- **Language Server** (optional): Supports the [tclsp](https://github.com/nmoroze/tclint) language server for linting and diagnostics in Tcl-based constraint files.
+- **Syntax Highlighting**: Full TextMate grammar with dedicated highlighting for:
+  - SDC object access commands (`get_ports`, `get_cells`, `get_clocks`, `all_inputs`, etc.)
+  - SDC timing constraints (`create_clock`, `set_input_delay`, `set_false_path`, etc.)
+  - SDC environment commands (`set_load`, `set_units`, `set_max_transition`, etc.)
+  - SDC power optimization commands (`create_voltage_area`, `set_max_dynamic_power`, etc.)
+  - XDC-specific commands (`set_property`, `get_property`, `create_pblock`, etc.)
+  - Tcl language constructs (`proc`, `foreach`, `if`, `set`, `expr`, etc.)
+
+- **Code Snippets**: 50+ snippets for rapid SDC/XDC authoring:
+  - Clock constraints (`create_clock`, `create_generated_clock`)
+  - IO timing (`set_input_delay`, `set_output_delay`)
+  - Timing exceptions (`set_false_path`, `set_multicycle_path`, `set_max_delay`)
+  - Clock relationships (`set_clock_groups`, `set_clock_uncertainty`)
+  - XDC pin assignments (`set_property PACKAGE_PIN`, `IOSTANDARD`)
+  - XDC debug (`create_debug_core`) and bitstream configuration
+  - File templates (`sdc_header`, `xdc_header`, `io_constraints`, `cdc`)
+
+- **Language Server** (optional): Supports the [tclsp](https://github.com/nmoroze/tclint) language server for linting and diagnostics.
 
 ## Language Server Setup
 
